@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>String Reverser</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f9f9f9;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 1rem;
+    }
+    #result {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Reverse a String</h1>
+  <input type="text" id="inputString" placeholder="Enter a string" />
+  <button onclick="reverseStr()">Reverse</button>
+  <p id="result"></p>
+
+  <script>
+    // function to send post req
+    async function reverseStr() {
+      const input = document.getElementById('inputString').value;
+      const res = await fetch('/reverse', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ input })
+      });
+
+      const data = await res.json();
+      // return result
+      document.getElementById('result').textContent = data.reversed 
+        ? `Reversed: ${data.reversed}` 
+        : `Error: ${data.error}`;
+    }
+  </script>
+</body>
+</html>
